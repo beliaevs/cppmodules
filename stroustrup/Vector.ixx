@@ -2,6 +2,7 @@ export module Vector;
 
 export class Vector {
 public:
+    Vector() = default;
     explicit Vector(int s);
     Vector(const Vector& other);
     Vector& operator=(const Vector&);
@@ -13,8 +14,8 @@ public:
     double operator[](int i) const;
     int size() const;
 private:
-    double* elem; // elem points to an array of sz doubles
-    int sz;
+    double* elem = nullptr; // elem points to an array of sz doubles
+    int sz = 0;
 };
 
 Vector::Vector(int s)
