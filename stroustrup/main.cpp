@@ -1,17 +1,6 @@
 import std;
 import Vector;
 
-void print(const Vector& vec, std::ostream& os)
-{
-    os << '[';
-    if (vec.size() > 0)
-        os << vec[0];
-    for (int i = 1; i != vec.size(); ++i)
-        os << ", " << vec[i];
-
-    os << ']';
-}
-
 int main()
 {
     Vector v(10);
@@ -21,6 +10,7 @@ int main()
 
     Vector w = v;
     Vector x{ std::move(w) };
-    print(v, std::cout);
+    std::cout << v << "\n";
+    std::cout << w << "\n";
     return 0;
 }

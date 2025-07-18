@@ -1,5 +1,7 @@
 export module Vector;
 
+import std;
+
 export class Vector {
 public:
     Vector() = default;
@@ -13,6 +15,8 @@ public:
     double& operator[](int i);
     double operator[](int i) const;
     int size() const;
+    friend std::ostream& operator<<(std::ostream& os, const Vector& vec);
+
 private:
     double* elem = nullptr; // elem points to an array of sz doubles
     int sz = 0;
@@ -32,6 +36,7 @@ Vector::Vector(const Vector& other) : elem{ new double[other.sz] }, sz{ other.sz
 Vector::Vector(Vector&& other) : elem{ other.elem }, sz{ other.sz }
 {
     other.elem = nullptr;
+    other.sz = 0;
 }
 
 Vector& Vector::operator=(const Vector& rhs)
@@ -56,6 +61,7 @@ Vector& Vector::operator=(Vector&& rhs)
         elem = rhs.elem;
         sz = rhs.sz;
         rhs.elem = nullptr;
+        rhs.sz = 0;
     }
     return *this;
 }
@@ -88,4 +94,21 @@ export bool operator==(const Vector& v1, const Vector& v2)
         if (v1[i] != v2[i])
             return false;
     return true;
+}
+
+void print(const Vector& vec, std::ostream& os)
+{
+    os << '[';
+    if (vec.size() > 0)
+        os << vec[0];
+    for (int i = 1; i < vec.size(); ++i)
+        os << ", " << vec[i];
+
+    os << ']';
+}
+
+export std::ostream& operator<<(std::ostream& os, const Vector& vec)
+{
+    print(vec, os);
+    return os;
 }
