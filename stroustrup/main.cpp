@@ -19,6 +19,8 @@ int main()
     for (int i = 0; i != v.size(); ++i)
         v[i] = 1. / (i + 1.);
 
+    Vector w = v;
+    Vector x{ std::move(w) };
     print(v, std::cout);
     return 0;
 }
